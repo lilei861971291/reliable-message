@@ -82,30 +82,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <forceTags>true</forceTags>
-                    <baseImage>java:openjdk-8-jdk-alpine</baseImage>
-                    <env>
-                        <JAVA_OPTS>"-server -Xms1024M -Xmx1024M -Dfile.encoding=UTF8  -Duser.timezone=GMT+08"</JAVA_OPTS>
-                    </env>
-                    <entryPoint>["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /${project.build.finalName}.jar"]</entryPoint>
-                    <resources>
-                        <resource>
-                            <targetPath>./</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-
-                    </resources>
-                    <serverId>docker-hub</serverId>
-                    <imageName>10.0.8.189/demo/${project.build.finalName}</imageName>
-                </configuration>
-            </plugin>
         </plugins>
         <finalName>message-server</finalName>
     </build>
